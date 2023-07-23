@@ -37,8 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'restaurant',
     'rest_framework',
-    'restaurant'
+    'rest_framework.authtoken',
+    'djoser',
+
 
 
 ]
@@ -132,3 +135,28 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+   ],
+}
+
+DJOSER = {
+    # Customize the configuration as per your requirements
+    # For example, you can set the registration activation email to be sent to users
+    "USER_ID_FIELD":"username",
+    'SEND_ACTIVATION_EMAIL': False,
+    'ACTIVATION_URL': '#/activate/{uid}/{token}',  # Add this line
+
+}
+
+# Email Configuration
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'your-smtp-host'
+# EMAIL_PORT = your-smtp-port
+#EMAIL_USE_TLS = True  # Or False if you don't want to use TLS
+# EMAIL_HOST_USER = 'your-smtp-username'
+# EMAIL_HOST_PASSWORD = 'your-smtp-password'
